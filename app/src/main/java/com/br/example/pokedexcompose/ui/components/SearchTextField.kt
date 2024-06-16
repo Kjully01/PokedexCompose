@@ -47,7 +47,7 @@ fun SearchTextField() {
             focusedIndicatorColor = Color.Transparent
         ),
         modifier = Modifier
-            .padding(16.dp)
+            .padding(bottom = 24.dp, start = 16.dp, end = 16.dp)
             .fillMaxWidth()
     )
 }
