@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -41,11 +42,12 @@ fun HomeScreen(pokemons: List<Pokemon>) {
                     IconButton(onClick = { /*TODO*/ }) {
                         Icon(
                             imageVector = Icons.Default.FavoriteBorder,
-                            contentDescription = "Pokemons Favorites"
+                            contentDescription = "Pokemons Favorites",
+                            Modifier.size(24.dp)
                         )
                     }
                 },
-                colors = TopAppBarDefaults.topAppBarColors(Color.White)
+                colors = TopAppBarDefaults.topAppBarColors(Color.Transparent)
             )
             SearchTextField()
         }
