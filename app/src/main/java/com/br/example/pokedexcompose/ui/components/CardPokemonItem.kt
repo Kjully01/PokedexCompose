@@ -30,7 +30,7 @@ fun CardPokemonItem() {
         Modifier
             .fillMaxWidth()
             .heightIn(85.dp),
-        shape = RoundedCornerShape(8.dp),
+        shape = RoundedCornerShape(20.dp),
         elevation = CardDefaults.cardElevation(4.dp),
         colors = CardDefaults.cardColors(
             containerColor = Color.Gray,
