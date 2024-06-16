@@ -43,22 +43,22 @@ fun CardPokemonItem() {
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Column {
-                Text(text = "#001", fontSize = 10.sp)
-                Text(text = "Bulbassaur", fontSize = 16.sp)
+                Text(text = "#001", fontSize = 10.sp, color = Color.White)
+                Text(text = "Bulbassaur", fontSize = 16.sp, color = Color.White)
                 Row(
-                    Modifier.padding(top = 10.dp)
+                    Modifier.padding(top = 10.dp),
+                    horizontalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
-                    Card(
-                        shape = RoundedCornerShape(50)
-                    ) {
-                        Text(text = "Grass", fontSize = 10.sp, modifier = Modifier.padding(vertical = 4.dp, horizontal = 10.dp))
-                    }
-                    Card(
-                        Modifier.padding(start = 2.dp),
-                        shape = RoundedCornerShape(50),
-                    ) {
-                        Text(text = "Posion", fontSize = 10.sp, modifier = Modifier.padding(vertical = 4.dp, horizontal = 10.dp))
-                    }
+                    CardTypePokemon(
+                        text = "Grass",
+                        fontSize = 10.sp,
+                        Modifier.padding(vertical = 4.dp, horizontal = 10.dp)
+                    )
+                    CardTypePokemon(
+                        text = "Posion",
+                        fontSize = 10.sp,
+                        Modifier.padding(vertical = 4.dp, horizontal = 10.dp)
+                    )
                 }
             }
             Row {
@@ -74,7 +74,8 @@ fun CardPokemonItem() {
                     imageVector = Icons.Default.Favorite,
                     contentDescription = null,
                     Modifier
-                        .size(16.dp)
+                        .size(16.dp),
+                    tint = Color.White
                 )
             }
         }
