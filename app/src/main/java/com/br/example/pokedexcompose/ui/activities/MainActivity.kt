@@ -20,47 +20,42 @@ import com.br.example.pokedexcompose.ui.theme.PokedexComposeTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContent {
             val pokemons = listOf(
                 Pokemon(1, "Bulbassaur", listOf("Grass", "Poison")),
                 Pokemon(2, "Bulbassaur", listOf("Grass", "Poison")),
                 Pokemon(3, "Bulbassaur", listOf("Grass", "Poison"))
             )
-//            PokedexComposeTheme {
-            Surface {
-                val navController = rememberNavController()
-                NavHost(
-                    navController = navController,
-                    startDestination = "home"
-                ) {
-                    composable("home") {
-                        HomeScreen(pokemons = pokemons,navController = navController
-                        )
-                    }
-                    composable("pokemon") {
-                        PokemonScreen()
-                    }
+            val navController = rememberNavController()
+            NavHost(
+                navController = navController,
+                startDestination = "home"
+            ) {
+                composable("home") {
+                    HomeScreen(
+                        pokemons = pokemons, navController = navController
+                    )
+                }
+                composable("pokemon") {
+                    PokemonScreen()
                 }
             }
-//            }
-
         }
     }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
 }
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    PokedexComposeTheme {
-        Greeting("Android")
-    }
+//    PokedexComposeTheme { /*TODO veririficar depois*/
+        Surface {
+            HomeScreen(
+                pokemons = listOf(
+                    Pokemon(1, "Bulbassaur", listOf("Grass", "Poison")),
+                    Pokemon(2, "Bulbassaur", listOf("Grass", "Poison")),
+                    Pokemon(3, "Bulbassaur", listOf("Grass", "Poison"))
+                ), navController = rememberNavController()
+            )
+        }
+//    }
 }
