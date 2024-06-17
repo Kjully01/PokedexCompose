@@ -25,9 +25,9 @@ import androidx.compose.ui.unit.sp
 import com.br.example.pokedexcompose.R
 
 @Composable
-fun CardPokemonItem() {
+fun CardPokemonItem(modifier: Modifier = Modifier) {
     Card(
-        Modifier
+        modifier = modifier
             .fillMaxWidth()
             .heightIn(85.dp),
         shape = RoundedCornerShape(20.dp),

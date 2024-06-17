@@ -1,5 +1,6 @@
 package com.br.example.pokedexcompose.ui.screens
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,13 +23,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.br.example.pokedexcompose.model.Pokemon
 import com.br.example.pokedexcompose.ui.components.CardPokemonItem
 import com.br.example.pokedexcompose.ui.components.SearchTextField
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(pokemons: List<Pokemon>) {
+fun HomeScreen(pokemons: List<Pokemon>, navController: NavController) {
     Column {
         Card(
             elevation = CardDefaults.cardElevation(5.dp),
@@ -39,7 +42,8 @@ fun HomeScreen(pokemons: List<Pokemon>) {
                     Text(text = "Pokédex")
                 },
                 actions = {
-                    IconButton(onClick = { /*TODO*/ }) {
+                    IconButton(onClick = {
+                    }) {
                         Icon(
                             imageVector = Icons.Default.FavoriteBorder,
                             contentDescription = "Pokemons Favorites",
@@ -59,7 +63,9 @@ fun HomeScreen(pokemons: List<Pokemon>) {
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             items(pokemons) {
-                CardPokemonItem()
+                CardPokemonItem(Modifier.clickable {
+                    navController.navigate("pokemon")
+                })
             }
         }
     }
@@ -73,6 +79,7 @@ private fun HomeScreenPreview() {
             Pokemon(1, "Bulbassaur", listOf("Grass", "Poison")),
             Pokemon(2, "Bulbassaur", listOf("Grass", "Poison")),
             Pokemon(3, "Bulbassaur", listOf("Grass", "Poison"))
-        )
+        ),
+        navController = rememberNavController()
     )
 }
