@@ -3,6 +3,7 @@ package com.br.example.pokedexcompose.ui.screens
 import android.widget.ProgressBar
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -39,12 +40,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.br.example.pokedexcompose.R
 import com.br.example.pokedexcompose.ui.components.CardTypePokemon
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PokemonScreen(modifier: Modifier = Modifier, qt: Int = 6) {
+fun PokemonScreen(modifier: Modifier = Modifier, qt: Int = 6, navController: NavController) {
     val scope = rememberCoroutineScope()
     val scaffoldState = rememberBottomSheetScaffoldState()
 
@@ -96,7 +99,7 @@ fun PokemonScreen(modifier: Modifier = Modifier, qt: Int = 6) {
             TopAppBar(
                 title = { Text(text = "") },
                 navigationIcon = {
-                    IconButton(onClick = { /*TODO*/ }) {
+                    IconButton(onClick = { navController.navigateUp() }) {
                         Icon(
                             imageVector = Icons.Default.Close,
                             contentDescription = null,
@@ -150,5 +153,5 @@ fun PokemonScreen(modifier: Modifier = Modifier, qt: Int = 6) {
 @Preview(showSystemUi = true)
 @Composable
 private fun PokemonScreenPreview() {
-    PokemonScreen()
+    PokemonScreen(navController = rememberNavController())
 }

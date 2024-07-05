@@ -37,7 +37,7 @@ class MainActivity : ComponentActivity() {
                     )
                 }
                 composable("pokemon") {
-                    PokemonScreen()
+                    PokemonScreen(navController = navController)
                 }
             }
         }
