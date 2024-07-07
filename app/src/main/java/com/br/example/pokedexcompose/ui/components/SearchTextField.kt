@@ -23,12 +23,11 @@ import com.br.example.pokedexcompose.ui.theme.GraySearchFocused
 import com.br.example.pokedexcompose.ui.theme.GraySearchUnfocused
 
 @Composable
-fun SearchTextField() {
-    var text by remember { mutableStateOf("") }
+fun SearchTextField(text: String, onSearchChange: (String) -> Unit) {
     TextField(
         value = text,
         onValueChange = { newValue ->
-            text = newValue
+            onSearchChange(newValue)
         },
         shape = RoundedCornerShape(20),
         label = {

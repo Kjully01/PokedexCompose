@@ -19,6 +19,11 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -26,12 +31,25 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.br.example.pokedexcompose.model.Pokemon
+import com.br.example.pokedexcompose.states.HomeScreenUiState
 import com.br.example.pokedexcompose.ui.components.CardPokemonItem
 import com.br.example.pokedexcompose.ui.components.SearchTextField
+import com.br.example.pokedexcompose.ui.viewmodel.HomeScreenViewModel
+
+@Composable
+fun HomeScreen(viewModel: HomeScreenViewModel) {
+    val state by viewModel.uiState.collectAsState()
+    HomeScreen(state = state)
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(pokemons: List<Pokemon>, navController: NavController) {
+fun HomeScreen(
+    pokemons: List<Pokemon> = listOf(), //retirar
+    navController: NavController = rememberNavController(), //retirar
+    state: HomeScreenUiState = HomeScreenUiState()
+) {
+    val text = state.text
     Column {
         Card(
             elevation = CardDefaults.cardElevation(5.dp),
@@ -53,7 +71,7 @@ fun HomeScreen(pokemons: List<Pokemon>, navController: NavController) {
                 },
                 colors = TopAppBarDefaults.topAppBarColors(Color.Transparent)
             )
-            SearchTextField()
+            SearchTextField(text = text, onSearchChange = state.onSearchChange)
         }
 
         LazyColumn(
@@ -62,10 +80,12 @@ fun HomeScreen(pokemons: List<Pokemon>, navController: NavController) {
                 .padding(24.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            items(pokemons) {
-                CardPokemonItem(Modifier.clickable {
-                    navController.navigate("pokemon")
-                })
+            items(pokemons) { pokemon ->
+                CardPokemonItem(
+                    pokemon,
+                    Modifier.clickable {
+                        navController.navigate("pokemon")
+                    })
             }
         }
     }
@@ -77,8 +97,8 @@ private fun HomeScreenPreview() {
     HomeScreen(
         pokemons = listOf(
             Pokemon(1, "Bulbassaur", listOf("Grass", "Poison")),
-            Pokemon(2, "Bulbassaur", listOf("Grass", "Poison")),
-            Pokemon(3, "Bulbassaur", listOf("Grass", "Poison"))
+            Pokemon(2, "teste", listOf("Grass", "Poison")),
+            Pokemon(3, "pokemon", listOf("Grass", "Poison"))
         ),
         navController = rememberNavController()
     )

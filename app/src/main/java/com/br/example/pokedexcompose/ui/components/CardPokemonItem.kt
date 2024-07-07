@@ -23,9 +23,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.br.example.pokedexcompose.R
+import com.br.example.pokedexcompose.model.Pokemon
 
 @Composable
-fun CardPokemonItem(modifier: Modifier = Modifier) {
+fun CardPokemonItem(
+    pokemon: Pokemon,
+    modifier: Modifier = Modifier
+) {
     Card(
         modifier = modifier
             .fillMaxWidth()
@@ -44,7 +48,7 @@ fun CardPokemonItem(modifier: Modifier = Modifier) {
         ) {
             Column {
                 Text(text = "#001", fontSize = 10.sp, color = Color.White)
-                Text(text = "Bulbassaur", fontSize = 16.sp, color = Color.White)
+                Text(text = pokemon.name, fontSize = 16.sp, color = Color.White)
                 Row(
                     Modifier.padding(top = 10.dp),
                     horizontalArrangement = Arrangement.spacedBy(4.dp)
@@ -86,5 +90,5 @@ fun CardPokemonItem(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 private fun CardPokemonItemPreview() {
-    CardPokemonItem()
+    CardPokemonItem(Pokemon(1, "Bulbassaur", listOf("Grass", "Possion")))
 }
