@@ -69,7 +69,7 @@ fun HomeScreen(
                 },
                 colors = TopAppBarDefaults.topAppBarColors(Color.Transparent)
             )
-            SearchTextField(text = text, onSearchChange = state.onSearchChange)
+            SearchTextField(searchText = text, onSearchChange = state.onSearchChange)
         }
 
         LazyColumn(
