@@ -21,16 +21,13 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.br.example.pokedexcompose.model.Pokemon
+import com.br.example.pokedexcompose.utils.mockPokemon
 import com.br.example.pokedexcompose.states.HomeScreenUiState
 import com.br.example.pokedexcompose.ui.components.CardPokemonItem
 import com.br.example.pokedexcompose.ui.components.SearchTextField
@@ -45,11 +42,12 @@ fun HomeScreen(viewModel: HomeScreenViewModel) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    pokemons: List<Pokemon> = listOf(), //retirar
-    navController: NavController = rememberNavController(), //retirar
-    state: HomeScreenUiState = HomeScreenUiState()
+    state: HomeScreenUiState = HomeScreenUiState(),
+    navController: NavController = rememberNavController() //retirar(?)
 ) {
-    val text = state.text
+    val text = state.searchText
+    val pokemons = state.pokemons
+
     Column {
         Card(
             elevation = CardDefaults.cardElevation(5.dp),
@@ -95,11 +93,14 @@ fun HomeScreen(
 @Composable
 private fun HomeScreenPreview() {
     HomeScreen(
-        pokemons = listOf(
-            Pokemon(1, "Bulbassaur", listOf("Grass", "Poison")),
-            Pokemon(2, "teste", listOf("Grass", "Poison")),
-            Pokemon(3, "pokemon", listOf("Grass", "Poison"))
-        ),
-        navController = rememberNavController()
+        HomeScreenUiState(pokemons = mockPokemon)
+    )
+}
+
+@Preview(showSystemUi = true)
+@Composable
+private fun HomeScreenWithSearchTextPreview() {
+    HomeScreen(
+        HomeScreenUiState(pokemons = mockPokemon, searchText = "teste")
     )
 }

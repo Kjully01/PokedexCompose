@@ -10,7 +10,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.br.example.pokedexcompose.model.Pokemon
+import com.br.example.pokedexcompose.states.HomeScreenUiState
+import com.br.example.pokedexcompose.utils.mockPokemon
 import com.br.example.pokedexcompose.ui.screens.HomeScreen
 import com.br.example.pokedexcompose.ui.screens.PokemonScreen
 import com.br.example.pokedexcompose.ui.viewmodel.HomeScreenViewModel
@@ -19,11 +20,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val pokemons = listOf(
-                Pokemon(1, "Bulbassaur", listOf("Grass", "Poison")),
-                Pokemon(2, "teste", listOf("Grass", "Poison")),
-                Pokemon(3, "pokemon", listOf("Grass", "Poison"))
-            )
+            val pokemons = mockPokemon
             val navController = rememberNavController()
             val viewModel by viewModels<HomeScreenViewModel>()
             NavHost(
@@ -46,15 +43,11 @@ class MainActivity : ComponentActivity() {
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun GreetingPreview() {
+fun AppPreview() {
 //    PokedexComposeTheme { /*TODO veririficar depois*/
         Surface {
             HomeScreen(
-                pokemons = listOf(
-                    Pokemon(1, "Bulbassaur", listOf("Grass", "Poison")),
-                    Pokemon(2, "teste", listOf("Grass", "Poison")),
-                    Pokemon(3, "pokemon", listOf("Grass", "Poison"))
-                ), navController = rememberNavController()
+                HomeScreenUiState(pokemons = mockPokemon), navController = rememberNavController()
             )
         }
 //    }
