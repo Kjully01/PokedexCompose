@@ -34,16 +34,19 @@ import com.br.example.pokedexcompose.ui.components.SearchTextField
 import com.br.example.pokedexcompose.ui.viewmodel.HomeScreenViewModel
 
 @Composable
-fun HomeScreen(viewModel: HomeScreenViewModel) {
+fun HomeScreen(
+    viewModel: HomeScreenViewModel,
+    navController: NavController = rememberNavController()
+) {
     val state by viewModel.uiState.collectAsState()
-    HomeScreen(state = state)
+    HomeScreen(state = state, navController = navController)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     state: HomeScreenUiState = HomeScreenUiState(),
-    navController: NavController = rememberNavController() //retirar(?)
+    navController: NavController = rememberNavController()
 ) {
     val text = state.searchText
     val pokemons = state.pokemons
@@ -94,13 +97,5 @@ fun HomeScreen(
 private fun HomeScreenPreview() {
     HomeScreen(
         HomeScreenUiState(pokemons = mockPokemon)
-    )
-}
-
-@Preview(showSystemUi = true)
-@Composable
-private fun HomeScreenWithSearchTextPreview() {
-    HomeScreen(
-        HomeScreenUiState(pokemons = mockPokemon, searchText = "teste")
     )
 }

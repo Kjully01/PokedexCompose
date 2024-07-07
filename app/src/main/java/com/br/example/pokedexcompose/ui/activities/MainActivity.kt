@@ -29,8 +29,8 @@ class MainActivity : ComponentActivity() {
             ) {
                 composable("home") {
                     HomeScreen(
-                        viewModel
-//                        pokemons = pokemons, navController = navController
+                        viewModel = viewModel,
+                        navController = navController
                     )
                 }
                 composable("pokemon") {
@@ -45,10 +45,10 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun AppPreview() {
 //    PokedexComposeTheme { /*TODO veririficar depois*/
-        Surface {
-            HomeScreen(
-                HomeScreenUiState(pokemons = mockPokemon), navController = rememberNavController()
-            )
-        }
+    Surface {
+        HomeScreen(
+            HomeScreenUiState(pokemons = mockPokemon), navController = rememberNavController()
+        )
+    }
 //    }
 }
